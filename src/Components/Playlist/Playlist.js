@@ -4,11 +4,24 @@ import { TrackList } from '../TrackList/TrackList'
 
 
 class Playlist extends React.Component {
+
+
+    constructor(props){
+        super(props);
+        this.handleNameChange = this.handleNameChange.bind(this);
+    }
+
+
+    handleNameChange(event){
+        let name = event.target.value;
+        this.props.onNameChange(name);
+    }
+
   render() {
     return (
       <div className="Playlist">
-        <input value="New Playlist" />
-        <TrackList />
+        <input defaultValue="New Playlist" onChange={this.handleNameChange} />
+        <TrackList playlistTracks={this.props.playlistTracks} onRemove={this.props.onRemove} isRemoval={true}/>
         <button className="Playlist-save">SAVE TO SPOTIFY</button>
       </div>
     );
